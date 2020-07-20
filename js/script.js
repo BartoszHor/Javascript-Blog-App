@@ -41,7 +41,7 @@
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list',
     optPostAuthor = '.post-author',
-    optTagsListSelector = '.list .tags';
+    optTagsListSelector = '.list.tags';
 
 
   const generateTitleLinks = function(customSelector = ''){
@@ -76,7 +76,8 @@
   generateTitleLinks();
 
   const generateTags = function(){
-  /* find all articles */
+    let allTags = {};
+    /* find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
     console.log(articles);
     /* START LOOP: for every article: */
@@ -95,17 +96,33 @@
       console.log(tagsArray);
       /* START LOOP: for each tag */
       for (let tag of tagsArray) {
-        console.log(tag);
         /* generate HTML of the link */
         const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '</a></li>  ';
-        console.log(linkHTML);
         /* add generated code to html variable */
         html = html + linkHTML;
-        console.log(html);
+        if(!allTags[tag]) {
+          allTags[tag] = 1;
+        } else {
+          allTags[tag]++
+        }
       } /* END LOOP: for each tag */
       /* insert HTML of all the links into the tags wrapper */
       tagsWrapper.insertAdjacentHTML('beforeend', html);
     }
+    const tagList = document.querySelector(optTagsListSelector);
+    /* [NEW] create variable for all links HTML code */
+    let allTagsHTML = '';
+
+    /* [NEW] START LOOP: for each tag in allTags: */
+    for(let tag in allTags){
+      /* [NEW] generate code of a link and add it to allTagsHTML */
+    allTagsHTML += '<li><a href="#tag-' + tag +'">'+ tag +' (' + allTags[tag] + ') </a></li> ';
+    }
+    /* [NEW] END LOOP: for each tag in allTags: */
+
+    /*[NEW] add HTML from allTagsHTML to tagList */
+    tagList.innerHTML = allTagsHTML;
+
   };
   generateTags();
 
@@ -199,12 +216,12 @@
     for (let activeAuthor of activeAuthors) {
     /* remove class active */
       activeAuthor.classList.remove('active');
-    }/* END LOOP: for each active tag link */
+    }/* END LOOP: for each active author link */
 
-    /* find all tag links with "href" attribute equal to the "href" constant */
+    /* find all author links with "href" attribute equal to the "href" constant */
     const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
 
-    /* START LOOP: for each found tag link */
+    /* START LOOP: for each found author link */
     for (let authorLink of authorLinks) {
     /* add class active */
       authorLink.classList.add('active');
@@ -228,42 +245,6 @@
 
   addClickListenersToAuthors();
 
-  function generateTags2(){
-  /* [NEW] create a new variable allTags with an empty array */
-  let allTags = [];
-
-  /* find all articles */
-  const articles = document.querySelectorAll(optArticleSelector);
-  /* START LOOP: for every article: */
-    for (let article of articles) {
-      /* find tags wrapper */
-      const tagsWrapper = article.querySelector(optArticleTagsSelector)
-      /* make html variable with empty string */
-      let html = ''
-      /* get tags from data-tags attribute */
-      const articleTags = article.getAttribute('data-tags')
-      /* split tags into array */
-      const tagsArray = articleTags.split(' ')
-      /* START LOOP: for each tag */
-      for (let tag of tagsArray) {
-        /* generate HTML of the link */
-        const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '</a></li> '
-        /* add generated code to html variable */
-        html = html + linkHTML
-        /* check if this link is NOT already in allTags */
-        if (allTags.indexOf(linkHTML) == -1) {
-          /* [NEW] add generated code to allTags array */
-          allTags.push(linkHTML)
-        } /* END LOOP: for each tag */
-      } /* insert HTML of all the links into the tags wrapper */
-      tagsWrapper.insertAdjacentHTML('beforeend', html);
-    } /* END LOOP: for every article: */
-  /* [NEW] find list of tags in right column */
-  const tagList = document.querySelector('.tags');
-  /* [NEW] add html from allTags to tagList */
-  tagList.innerHTML = allTags.join(' ');
-}
-generateTags2();
 }
 
 
