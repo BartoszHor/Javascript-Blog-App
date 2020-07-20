@@ -74,8 +74,6 @@ body {
   text-align: center;
 }
 
-/* Lists */
-
 .list {
   list-style-type: none;
   margin: 0;
@@ -89,6 +87,39 @@ body {
 .list-horizontal {
   li {
     display: inline-block;
+  }
+}
+
+aside {
+  color: gold;
+  .tags {
+    li {
+      display: inline-flex;
+    }
+    a {
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+  .tag-size-1 {
+  font-size: 14px;
+  color: blue;
+  }
+  .tag-size-2 {
+  font-size: 16px;
+  color: purple;
+  }
+  .tag-size-3 {
+  font-size: 18px;
+  color: red;
+  }
+  .tag-size-4 {
+  font-size: 20px;
+  color: green;
+  }
+  .tag-size-5 {
+  font-size: 24px;
+  color: green;
   }
 }
 

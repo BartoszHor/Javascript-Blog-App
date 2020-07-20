@@ -66,7 +66,6 @@ body {
   text-align: center;
 }
 
-/* Lists */
 .list {
   list-style-type: none;
   margin: 0;
@@ -79,6 +78,45 @@ body {
 
 .list-horizontal li {
   display: inline-block;
+}
+
+aside {
+  color: gold;
+}
+
+aside .tags li {
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+aside .tags a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+aside .tag-size-1 {
+  font-size: 14px;
+  color: blue;
+}
+
+aside .tag-size-2 {
+  font-size: 16px;
+  color: purple;
+}
+
+aside .tag-size-3 {
+  font-size: 18px;
+  color: red;
+}
+
+aside .tag-size-4 {
+  font-size: 20px;
+  color: green;
+}
+
+aside .tag-size-5 {
+  font-size: 24px;
+  color: green;
 }
 
 /* Authors */
